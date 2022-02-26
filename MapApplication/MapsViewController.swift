@@ -16,6 +16,7 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var notTextField: UITextField!
     
+    @IBOutlet weak var saveButton: UIButton!
     var locationManager = CLLocationManager()
     var selectedLatitude = Double()
     var selectedLongitude = Double()
@@ -87,6 +88,11 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                                             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
                                             let region = MKCoordinateRegion(center: coordinate, span: span)
                                             mapView.setRegion(region, animated: true)
+                                            
+                                            saveButton.isHidden = true
+                                            saveButton.isEnabled = false
+                                            nameTextField.isEnabled = false
+                                            notTextField.isEnabled = false
                                         }
                                     }
                                 }
@@ -103,6 +109,7 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             }
             
         } else {
+            
             
             
             
@@ -207,6 +214,7 @@ class MapsViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         do {
             try context.save()
             print("Kayıt edildi")
+           
         } catch {
             print("hata")
         }
